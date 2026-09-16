@@ -11,7 +11,7 @@ login_manager = LoginManager()
 def create_app():
     app = Flask(__name__)
 
-        database_url = os.environ.get("DATABASE_URL", "sqlite:///gym.db")
+    database_url = os.environ.get("DATABASE_URL", "sqlite:///gym.db")
     # Render/Heroku style postgres:// URLs need to be rewritten for SQLAlchemy,
     # and pointed at the psycopg3 driver specifically.
     if database_url.startswith("postgres://"):
@@ -62,12 +62,4 @@ def create_app():
 
 def _seed_admin():
     """Create a default admin user on first run if none exists."""
-    from app.models import User
-
-    if User.query.count() == 0:
-        admin_username = os.environ.get("ADMIN_USERNAME", "admin")
-        admin_password = os.environ.get("ADMIN_PASSWORD", "admin123")
-        admin = User(username=admin_username, role="admin")
-        admin.set_password(admin_password)
-        db.session.add(admin)
-        db.session.commit()
+    from app.models import
