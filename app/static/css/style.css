@@ -1,0 +1,262 @@
+/* ===========================================================
+   IronCore Gym — "Private Club" theme
+   Espresso base, brushed-brass accent, ivory text.
+   =========================================================== */
+
+:root {
+  --bg: #15120f;
+  --bg-raised: #1d1815;
+  --bg-raised-2: #241e19;
+  --hairline: #3a2f26;
+  --hairline-soft: #2a231d;
+
+  --brass: #b8935a;
+  --brass-bright: #d4ad78;
+  --brass-dim: #8a6b41;
+
+  --ivory: #f3ece1;
+  --stone: #a89a8a;
+  --stone-dim: #6f6459;
+
+  --ink: #1c1712;
+
+  --pine: #4c6b52;
+  --wine: #8c3f3a;
+  --slate: #5b5851;
+
+  --radius: 6px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(ellipse 1200px 600px at 15% -10%, rgba(184,147,90,0.06), transparent 60%),
+    radial-gradient(ellipse 900px 500px at 100% 10%, rgba(184,147,90,0.04), transparent 55%);
+  color: var(--ivory);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6, .brand-font {
+  font-family: 'Fraunces', Georgia, 'Times New Roman', serif;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--ivory);
+}
+
+a { color: var(--brass-bright); text-decoration: none; }
+a:hover { color: var(--brass); }
+
+.app-navbar {
+  background-color: var(--bg-raised-2);
+  border-bottom: 1px solid var(--hairline);
+  padding-top: 0.65rem;
+  padding-bottom: 0.65rem;
+}
+
+.app-navbar .navbar-brand {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  color: var(--brass-bright) !important;
+  font-size: 1.25rem;
+  letter-spacing: 0.02em;
+}
+
+.app-navbar .navbar-brand i { color: var(--brass); }
+
+.app-navbar .nav-link {
+  color: var(--stone);
+  font-size: 0.92rem;
+  padding-left: 0.9rem;
+  padding-right: 0.9rem;
+}
+
+.app-navbar .nav-link:hover { color: var(--ivory); }
+
+.app-navbar .navbar-text { color: var(--stone) !important; font-size: 0.88rem; }
+
+.app-navbar .btn-outline-light {
+  border-color: var(--hairline);
+  color: var(--stone);
+}
+.app-navbar .btn-outline-light:hover {
+  background-color: var(--brass);
+  border-color: var(--brass);
+  color: var(--ink);
+}
+
+.btn-brass {
+  background-color: var(--brass);
+  border: 1px solid var(--brass);
+  color: var(--ink);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.btn-brass:hover {
+  background-color: var(--brass-bright);
+  border-color: var(--brass-bright);
+  color: var(--ink);
+}
+
+.btn-outline-secondary {
+  color: var(--stone);
+  border-color: var(--hairline);
+  background: transparent;
+}
+.btn-outline-secondary:hover {
+  background-color: var(--bg-raised-2);
+  border-color: var(--brass-dim);
+  color: var(--ivory);
+}
+
+.btn-outline-danger {
+  color: #c98984;
+  border-color: #4a2b28;
+  background: transparent;
+}
+.btn-outline-danger:hover {
+  background-color: var(--wine);
+  border-color: var(--wine);
+  color: var(--ivory);
+}
+
+.card-panel {
+  background: var(--bg-raised);
+  border-radius: var(--radius);
+  border: 1px solid var(--hairline-soft);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+}
+
+.card-panel h5, .card-panel h6 {
+  border-bottom: 1px solid var(--hairline-soft);
+  padding-bottom: 0.6rem;
+  margin-bottom: 0.9rem;
+  color: var(--brass-bright);
+  font-size: 1rem;
+  text-transform: none;
+}
+
+.stat-card {
+  border-radius: var(--radius);
+  padding: 1.4rem 1.5rem;
+  background: var(--bg-raised);
+  border: 1px solid var(--hairline-soft);
+  border-left: 3px solid var(--brass);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+}
+
+.stat-card h3 {
+  font-family: 'Fraunces', serif;
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--ivory);
+  margin-bottom: 0.2rem;
+}
+
+.stat-card .label {
+  font-size: 0.78rem;
+  color: var(--stone);
+  letter-spacing: 0.04em;
+}
+
+.bg-orange, .bg-navy, .bg-green, .bg-purple {
+  background: var(--bg-raised);
+}
+
+.table {
+  --bs-table-color: var(--ivory);
+  --bs-table-bg: transparent;
+  --bs-table-border-color: var(--hairline-soft);
+  --bs-table-striped-color: var(--ivory);
+  --bs-table-hover-color: var(--ivory);
+  color: var(--ivory);
+}
+
+.table thead th {
+  color: var(--stone);
+  font-weight: 500;
+  font-size: 0.82rem;
+  letter-spacing: 0.02em;
+  border-bottom: 1px solid var(--hairline);
+  background: transparent;
+}
+
+.table td, .table th {
+  border-color: var(--hairline-soft);
+  vertical-align: middle;
+}
+
+.table-hover > tbody > tr:hover > * {
+  background-color: rgba(184,147,90,0.06);
+  color: var(--ivory);
+}
+
+.badge-active { background-color: var(--pine); color: var(--ivory); font-weight: 500; }
+.badge-expired { background-color: var(--wine); color: var(--ivory); font-weight: 500; }
+.badge-noplan { background-color: var(--slate); color: var(--ivory); font-weight: 500; }
+
+.form-label {
+  color: var(--stone);
+  font-size: 0.88rem;
+  margin-bottom: 0.35rem;
+}
+
+.form-control, .form-select {
+  background-color: var(--bg-raised-2);
+  border: 1px solid var(--hairline);
+  color: var(--ivory);
+}
+
+.form-control::placeholder { color: var(--stone-dim); }
+
+.form-control:focus, .form-select:focus {
+  background-color: var(--bg-raised-2);
+  border-color: var(--brass);
+  color: var(--ivory);
+  box-shadow: 0 0 0 0.2rem rgba(184,147,90,0.15);
+}
+
+.form-select option { background-color: var(--bg-raised-2); color: var(--ivory); }
+
+.alert {
+  border-radius: var(--radius);
+  border: 1px solid var(--hairline);
+  background-color: var(--bg-raised);
+  color: var(--ivory);
+}
+.alert-success { border-left: 3px solid var(--pine); }
+.alert-danger { border-left: 3px solid var(--wine); }
+.alert-info { border-left: 3px solid var(--brass); }
+.btn-close { filter: invert(1) grayscale(1) opacity(0.6); }
+
+.login-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(ellipse 900px 500px at 50% 0%, rgba(184,147,90,0.10), transparent 60%);
+}
+
+.login-card {
+  background: var(--bg-raised);
+  border: 1px solid var(--hairline);
+  border-radius: 10px;
+  padding: 2.75rem 2.5rem;
+  width: 100%;
+  max-width: 380px;
+  box-shadow: 0 30px 70px rgba(0,0,0,0.55);
+}
+
+.login-card h3 {
+  font-family: 'Fraunces', serif;
+  color: var(--brass-bright);
+  font-size: 1.7rem;
+}
+
+.login-card p.text-muted { color: var(--stone) !important; }
+.login-card .small { color: var(--stone-dim) !important; }

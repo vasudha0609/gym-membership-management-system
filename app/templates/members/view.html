@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}{{ member.member_name }}{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h3>{{ member.member_name }}</h3>
+  <a href="{{ url_for('members.edit_member', member_id=member.member_id) }}" class="btn btn-outline-secondary btn-sm">Edit Details</a>
+</div>
+
+<div class="row g-3">
+  <div class="col-md-4">
+    <div class="card-panel p-3">
+      <h6 class="text-muted">Contact</h6>
+      <p class="mb-1"><strong>Email:</strong> {{ member.email or '-' }}</p>
+      <p class="mb-1"><strong>Phone:</strong> {{ member.phone or '-' }}</p>
+      <p class="mb-1"><strong>Joined:</strong> {{ member.join_date }}</p>
+      <p class="mb-1"><strong>Trainer:</strong> {{ member.trainer.trainer_name if member.trainer else '-' }}</p>
+      <p class="mb-0"><strong>Total Spent:</strong> ₹{{ "%.2f"|format(member.total_spent) }}</p>
+    </div>
+
+    <div class="card-panel p-3 mt-3">
+      <h6 class="text-muted">Renew / Assign Plan</h6>
+      <form method="POST" action="{{ url_for('members.renew_membership', member_id=member.member_id) }}">
+        <select name="plan_id" class="form-select mb-2" required>
+          {% for p in plans %}
+            <option value="{{ p.plan_id }}">{{ p.plan_name }} (₹{{ p.price }} / {{ p.duration }} days)</option>
+          {% endfor %}
+        </select>
+        <button class="btn btn-brass btn-sm w-100">Renew Now</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="col-md-8">
+    <div class="card-panel p-3 mb-3">
+      <h6 class="text-muted">Membership History</h6>
+      <table class="table table-sm mb-0">
+        <thead><tr><th>Plan</th><th>Start</th><th>End</th></tr></thead>
+        <tbody>
+        {% for m in member.memberships|sort(attribute='end_date', reverse=True) %}
+          <tr><td>{{ m.plan.plan_name }}</td><td>{{ m.start_date }}</td><td>{{ m.end_date }}</td></tr>
+        {% else %}
+          <tr><td colspan="3" class="text-muted text-center">No memberships yet.</td></tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card-panel p-3">
+      <h6 class="text-muted">Payment History</h6>
+      <table class="table table-sm mb-0">
+        <thead><tr><th>Date</th><th>Amount</th><th>Status</th></tr></thead>
+        <tbody>
+        {% for p in member.payments|sort(attribute='payment_date', reverse=True) %}
+          <tr><td>{{ p.payment_date }}</td><td>₹{{ p.amount }}</td><td>{{ p.status }}</td></tr>
+        {% else %}
+          <tr><td colspan="3" class="text-muted text-center">No payments yet.</td></tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

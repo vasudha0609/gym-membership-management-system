@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Payments{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h3>Payments</h3>
+  <a href="{{ url_for('payments.new_payment') }}" class="btn" style="background:#ff5c35;color:#fff;">+ Record Payment</a>
+</div>
+
+<div class="card-panel p-3">
+<table class="table table-hover align-middle">
+  <thead><tr><th>Member</th><th>Amount</th><th>Date</th><th>Status</th><th></th></tr></thead>
+  <tbody>
+  {% for p in payments %}
+    <tr>
+      <td>{{ p.member.member_name }}</td>
+      <td>₹{{ p.amount }}</td>
+      <td>{{ p.payment_date }}</td>
+      <td>
+        {% if p.status == 'Completed' %}
+          <span class="badge badge-active">Completed</span>
+        {% elif p.status == 'Pending' %}
+          <span class="badge bg-warning text-dark">Pending</span>
+        {% else %}
+          <span class="badge badge-expired">Failed</span>
+        {% endif %}
+      </td>
+      <td class="text-end">
+        <form method="POST" action="{{ url_for('payments.delete_payment', payment_id=p.payment_id) }}" class="d-inline" onsubmit="return confirm('Delete this payment record?');">
+          <button class="btn btn-sm btn-outline-danger">Delete</button>
+        </form>
+      </td>
+    </tr>
+  {% else %}
+    <tr><td colspan="5" class="text-center text-muted">No payments recorded yet.</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Trainers{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h3>Trainers</h3>
+  <a href="{{ url_for('trainers.new_trainer') }}" class="btn" style="background:#ff5c35;color:#fff;">+ Add Trainer</a>
+</div>
+
+<div class="card-panel p-3">
+<table class="table table-hover align-middle">
+  <thead><tr><th>Name</th><th>Specialization</th><th>Phone</th><th>Members</th><th></th></tr></thead>
+  <tbody>
+  {% for t in trainers %}
+    <tr>
+      <td>{{ t.trainer_name }}</td>
+      <td>{{ t.specialization or '-' }}</td>
+      <td>{{ t.phone or '-' }}</td>
+      <td>{{ t.members|length }}</td>
+      <td class="text-end">
+        <a href="{{ url_for('trainers.edit_trainer', trainer_id=t.trainer_id) }}" class="btn btn-sm btn-outline-secondary">Edit</a>
+        <form method="POST" action="{{ url_for('trainers.delete_trainer', trainer_id=t.trainer_id) }}" class="d-inline" onsubmit="return confirm('Delete this trainer?');">
+          <button class="btn btn-sm btn-outline-danger">Delete</button>
+        </form>
+      </td>
+    </tr>
+  {% else %}
+    <tr><td colspan="5" class="text-center text-muted">No trainers yet.</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+{% endblock %}

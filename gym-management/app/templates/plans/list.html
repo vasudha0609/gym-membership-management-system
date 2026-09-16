@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Plans{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h3>Membership Plans</h3>
+  <a href="{{ url_for('plans.new_plan') }}" class="btn" style="background:#ff5c35;color:#fff;">+ Add Plan</a>
+</div>
+
+<div class="card-panel p-3">
+<table class="table table-hover align-middle">
+  <thead><tr><th>Plan Name</th><th>Duration (days)</th><th>Price</th><th></th></tr></thead>
+  <tbody>
+  {% for p in plans %}
+    <tr>
+      <td>{{ p.plan_name }}</td>
+      <td>{{ p.duration }}</td>
+      <td>₹{{ p.price }}</td>
+      <td class="text-end">
+        <a href="{{ url_for('plans.edit_plan', plan_id=p.plan_id) }}" class="btn btn-sm btn-outline-secondary">Edit</a>
+        <form method="POST" action="{{ url_for('plans.delete_plan', plan_id=p.plan_id) }}" class="d-inline" onsubmit="return confirm('Delete this plan?');">
+          <button class="btn btn-sm btn-outline-danger">Delete</button>
+        </form>
+      </td>
+    </tr>
+  {% else %}
+    <tr><td colspan="4" class="text-center text-muted">No plans yet.</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}{{ 'Edit' if member else 'Add' }} Member{% endblock %}
+{% block content %}
+<h3 class="mb-4">{{ 'Edit' if member else 'Add' }} Member</h3>
+
+<div class="card-panel p-4" style="max-width:600px;">
+<form method="POST">
+  <div class="mb-3">
+    <label class="form-label">Full Name *</label>
+    <input type="text" name="member_name" class="form-control" required
+           value="{{ member.member_name if member else '' }}">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Email</label>
+    <input type="email" name="email" class="form-control"
+           value="{{ member.email if member else '' }}">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Phone</label>
+    <input type="text" name="phone" class="form-control"
+           value="{{ member.phone if member else '' }}">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Join Date</label>
+    <input type="date" name="join_date" class="form-control"
+           value="{{ member.join_date if member else '' }}">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Assigned Trainer</label>
+    <select name="trainer_id" class="form-select">
+      <option value="">-- None --</option>
+      {% for t in trainers %}
+        <option value="{{ t.trainer_id }}"
+          {% if member and member.trainer_id == t.trainer_id %}selected{% endif %}>
+          {{ t.trainer_name }} ({{ t.specialization or 'General' }})
+        </option>
+      {% endfor %}
+    </select>
+  </div>
+
+  {% if not member %}
+  <div class="mb-3">
+    <label class="form-label">Starting Plan (optional)</label>
+    <select name="plan_id" class="form-select">
+      <option value="">-- No plan yet --</option>
+      {% for p in plans %}
+        <option value="{{ p.plan_id }}">{{ p.plan_name }} (₹{{ p.price }} / {{ p.duration }} days)</option>
+      {% endfor %}
+    </select>
+  </div>
+  {% endif %}
+
+  <button type="submit" class="btn btn-brass">Save</button>
+  <a href="{{ url_for('members.list_members') }}" class="btn btn-outline-secondary">Cancel</a>
+</form>
+</div>
+{% endblock %}
